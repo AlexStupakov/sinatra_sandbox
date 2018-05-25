@@ -27,7 +27,7 @@ class Website < Sinatra::Base
         :email_user_name => ENV['SENDGRID_USERNAME'],
         :email_password => ENV['SENDGRID_PASSWORD'],
         :email_domain => 'heroku.com'
-  end  
+  end
 
   before do
     set_title
@@ -45,25 +45,25 @@ class Website < Sinatra::Base
 
   def set_title
     @title ||= "Songs By Sinatra"
-  end  
+  end
 
   def send_message
     Pony.mail(
-      :from => params[:name] + "<" + params[:email] + ">",
-      :to => 'daz@gmail.com',
-      :subject => params[:name] + " has contacted you",
-      :body => params[:message],
-      :port => '587',
-      :via => :smtp,
-      :via_options => {
-        :address    => 'smtp.gmail.com',
-        :port       => '587',
-        :enable_starttls_auto => true,
-        :user_name  => 'daz',
-        :password   => 'secret',
-        :authentication => :plain,
-        :domain     => 'localhost.localdomain'
-      })
+        :from => params[:name] + "<" + params[:email] + ">",
+        :to => 'daz@gmail.com',
+        :subject => params[:name] + " has contacted you",
+        :body => params[:message],
+        :port => '587',
+        :via => :smtp,
+        :via_options => {
+            :address    => 'smtp.gmail.com',
+            :port       => '587',
+            :enable_starttls_auto => true,
+            :user_name  => 'daz',
+            :password   => 'secret',
+            :authentication => :plain,
+            :domain     => 'localhost.localdomain'
+        })
   end
 
   get('/styles.css'){ scss :styles }

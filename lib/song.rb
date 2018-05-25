@@ -4,7 +4,7 @@ require 'dm-migrations'
 require 'slim'
 require 'sass'
 require 'sinatra/flash'
-require './auth'
+require_relative 'auth'
 
 
 class Song
