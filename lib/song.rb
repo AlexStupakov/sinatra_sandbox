@@ -32,7 +32,11 @@ module SongHelpers
 	end
 
 	def create_song
+    p "_______________create_song"
+    p "params[:song]"
+    p params[:song]
 		@song = Song.create(params[:song])
+    p ["@song", @song]
 	end
 end
 
@@ -51,11 +55,14 @@ class SongController < Sinatra::Base
 	end
 
 	configure :development do
-		DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+    options = YAML.load_file('config/database.yml')
+    DataMapper.setup(:default, options['development'])
+
 	end
 
 	configure :production do
-		DataMapper.setup(:default, ENV['DATABASE_URL'])
+    options = YAML.load_file('config/database.yml')
+    DataMapper.setup(:default, options['production'])
 	end
 
 	before do
@@ -82,8 +89,8 @@ class SongController < Sinatra::Base
 	end
 
 	get '/new' do
-		protected!
-		halt(401,'Not Authorized') unless session[:admin]
+		# protected!
+		# halt(401,'Not Authorized') unless session[:admin]
 		@song = Song.new
 		slim :new_song
 	end
@@ -100,7 +107,7 @@ class SongController < Sinatra::Base
 	end
 
 	post '/' do
-		protected!
+		# protected!
 		flash[:notice] = "Song successfully added" if create_song
 		redirect to("/#{@song.id}")
 	end
@@ -114,7 +121,7 @@ class SongController < Sinatra::Base
 	end
 
 	delete '/:id' do
-		protected!
+		# protected!
 		if find_song.destroy
 			flash[:notice] = "Song deleted"
 		end
