@@ -1,4 +1,4 @@
-sinatra_sandbox gem - add sinatra app to rails app
+sinatra_sandbox gem - add sinatra gem with model to rails app
 
     add to gemfile
 
