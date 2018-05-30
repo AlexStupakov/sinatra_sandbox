@@ -72,7 +72,9 @@ module SinatraSandbox
 
     post '/' do
       # protected!
-      # flash[:notice] = "Song successfully added" if create_song
+      if create_song
+        # flash[:notice] = "Song successfully added"
+      end
       redirect to("/#{@song.id}")
     end
 
