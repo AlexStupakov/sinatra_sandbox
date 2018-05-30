@@ -1,7 +1,9 @@
-run with 
-	rackup config.ru
+sinatra_sandbox gem - add sinatra app to rails app
 
-Migration!
- in terminal execute 
- 		require './song'
- 		Song.auto_migrate!
+    add to gemfile
+
+    run bundle install
+
+    run rails generate sinatra_sandbox:initialize
+
+    run rake db:migrate
